@@ -6,8 +6,9 @@ import { useNavigate } from "react-router-dom";
 const Bookings = () => {
   const { user } = useContext(AuthContext);
   const [booking, setBooking] = useState([]);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const url = `http://localhost:5000/bookings?email=${user?.email}`;
+  console.log(url)
   useEffect(() => {
     fetch(url,{
       method:"GET",
@@ -16,15 +17,17 @@ const Bookings = () => {
       },
       body:JSON.stringify()
     })
-      .then((res) => res.json())
-      .then((data) => {
+    .then(res => res.json())
+    .then(data => {
         if(!data.error){
-          setBooking(data)
-        }else{
-          navigate('/')
+            setBooking(data)
         }
-      });
-  }, [url]);
+        else{
+            // logout and then navigate
+            navigate('/');
+        }
+    })
+  }, [url ,  navigate]);
 
   const handelDelete = (id) => {
     fetch(`http://localhost:5000/bookings/${id}`, {
