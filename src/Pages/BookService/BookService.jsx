@@ -28,7 +28,7 @@ const BookService = () => {
             service_id: _id
         }
         console.log(booking)
-        fetch(`http://localhost:5000/bookings`,{
+        fetch(`https://car-doctor-server-mdarefineahamedjoy.vercel.app/bookings`,{
             method:'POST',
             headers:{
                 'content-type':"application/json"
